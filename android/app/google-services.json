@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "403790800210",
+    "project_id": "hostelbuddy-1226f",
+    "storage_bucket": "hostelbuddy-1226f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403790800210:android:ad5f0bdb9228ec743f468b",
+        "android_client_info": {
+          "package_name": "com.example.hostel_buddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEmSnclG8fvIEn5jxKNTKNGZldNHoieJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

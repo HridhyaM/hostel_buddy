@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "hostelbuddy-1226f",
+          "appId": "1:403790800210:android:ad5f0bdb9228ec743f468b",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "hostelbuddy-1226f",
+          "configurations": {
+            "android": "1:403790800210:android:ad5f0bdb9228ec743f468b",
+            "ios": "1:403790800210:ios:4978515211ef2d683f468b",
+            "macos": "1:403790800210:ios:4978515211ef2d683f468b",
+            "web": "1:403790800210:web:be9182c4d2c190423f468b",
+            "windows": "1:403790800210:web:2c2e0c0abf9ad62f3f468b"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
