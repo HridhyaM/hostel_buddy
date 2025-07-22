@@ -1,18 +1,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hostel_buddy">
 
-    <!-- Permissions (add these at the top level, outside <application>) -->
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <!-- Optional fallback for Android <13 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
+    <!-- Intent queries (for GPay or PROCESS_TEXT support) -->
+    <queries>
+        <!-- To allow querying UPI apps like GPay -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="upi" />
+        </intent>
+
+        <!-- Optional: to support sharing or processing plain text -->
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
+
     <application
         android:label="hostel_buddy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -26,11 +42,12 @@
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
-            
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <meta-data
@@ -38,11 +55,4 @@
             android:value="2" />
     </application>
 
-    <!-- Required to query activities that can process text -->
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.PROCESS_TEXT" />
-            <data android:mimeType="text/plain" />
-        </intent>
-    </queries>
 </manifest>

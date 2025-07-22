@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -66,29 +65,7 @@ class _BookingPageState extends State<BookingPage> {
                 child: Column(
                 //   mainAxisSize: MainAxisSize.min,
                   children: [
-                //     // Logo Section
-                //     Container(
-                //       padding: const EdgeInsets.all(12),
-                //       decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(12),
-                //         gradient: const LinearGradient(
-                //           colors: [
-                //             Color(0xFF002E47),
-                //             Color(0xFF1B506D),
-                //             Color(0xFF0F547B),
-                //             Color(0xFF01334F),
-                //           ],
-                //         ),
-                //       ),
-                //       child: Image.asset(
-                //         'assets/images/splash_img.png',
-                //         height: 100,
-                //         width: double.infinity,
-                //       ),
-                //     ),
-                //     const SizedBox(height: 20),
-              
-                //     // Title
+               
                      Align(
                       alignment: Alignment.centerLeft,
                       child: 
@@ -123,23 +100,6 @@ class _BookingPageState extends State<BookingPage> {
                     ],
                   ),
           
-                //     const SizedBox(height: 16),
-              
-                //     // Toggle Buttons
-                //     Container(
-                //       decoration: BoxDecoration(
-                //         color: const Color(0xFF0F547B),
-                //         borderRadius: BorderRadius.circular(12),
-                //       ),
-                //       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                //       child: Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //         children: [
-                //           buildToggleButton("Without Food", false),
-                //           buildToggleButton("With Food", true),
-                //         ],
-                //       ),
-                //     ),
                   const SizedBox(height: 20),
               
                 //     // Price
@@ -296,17 +256,29 @@ class _BookingPageState extends State<BookingPage> {
 Future<void> launchGPayPayment() async {
   final amount = withFood ? "5000" : "4000";
   final upiId = "hridhyamm007@oksbi"; 
-  final name = "Hostel Buddy ";
+  final name = Uri.encodeComponent("Hostel Buddy");
+  final note = Uri.encodeComponent("PG Booking");
 
-  final uri = Uri.parse(
-    "upi://pay?pa=$upiId&pn=$name&am=$amount&cu=INR",
-  );
-   print("👉 Redirecting to GPay with: $uri"); 
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  } else {
-    Get.snackbar("Error", "Unable to launch UPI app",
+  final uriString =
+      "upi://pay?pa=$upiId&pn=$name&tn=$note&am=$amount&cu=INR";
+
+  final uri = Uri.parse(uriString);
+
+  try {
+    final launched = await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
+
+    if (!launched) {
+      Get.snackbar("Error", "Could not launch UPI app",
+          snackPosition: SnackPosition.BOTTOM);
+    }
+  } catch (e) {
+    Get.snackbar("Error", "No UPI app available",
         snackPosition: SnackPosition.BOTTOM);
   }
 }
+
+
 }
