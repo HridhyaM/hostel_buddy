@@ -14,10 +14,9 @@ class SplashView extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF002E47),
-              Color(0xFF1B506D),
-              Color(0xFF0F547B),
-              Color(0xFF01334F),
+            Color(0xff1A5D1A), // Deep Forest Green
+    Color(0xff4CAF50), // Medium Green
+    Color(0xffA5D6A7), 
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

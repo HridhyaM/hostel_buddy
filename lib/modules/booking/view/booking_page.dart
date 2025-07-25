@@ -1,284 +1,267 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:hostel_buddy/app/routes/app_routes.dart'; // <-- import this
 
 
 class BookingPage extends StatefulWidget {
+    final Map<String, dynamic> registrationData;
+
+    const BookingPage({super.key, required this.registrationData});
+
   @override
-  _BookingPageState createState() => _BookingPageState();
+  State<BookingPage> createState() => _BookingPageState();
 }
 
 class _BookingPageState extends State<BookingPage> {
-  bool withFood = true;
+  String selectedOption = '';
+
+
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      backgroundColor:Color(0xff99C0DF),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
+      body: Stack(
+        children: [
+          // Background Layers
+          Column(
             children: [
-              Container(
-                width: double.infinity,
-                height: 200,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                            colors: [
-                              Color(0xFF002E47),
-                              Color(0xFF1B506D),
-                              Color(0xFF0F547B),
-                              Color(0xFF01334F),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
-                ),
-                 child: Image.asset(
-                        'assets/images/splash_img.png',
-                        height: 100,
-                        width: double.infinity,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                        Container(
-                          height: 306,
-                          width: 365,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF002E47),
-                            Color(0xFF1B506D),
-                            Color(0xFF0F547B),
-                            Color(0xFF01334F),
-                          ],
-                        ),
-                      ),
-                        
-                child: Column(
-                //   mainAxisSize: MainAxisSize.min,
-                  children: [
-               
-                     Align(
-                      alignment: Alignment.centerLeft,
-                      child: 
-          
-          
-          
-                          Row(
-                            children: [
-                              Icon(Icons.person,size: 30,color: Colors.white,),
-                              Text(
-                                ' Personal Details',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 25,
-                                  
-                                ),
-                              ),
-                            ],
-                          ),
-                     
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-          
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildToggleButton("Without Food", false),
-                      buildToggleButton("With Food", true),
-                    ],
-                  ),
-          
-                  const SizedBox(height: 20),
-              
-                //     // Price
-                    Container(
-                      width: 150,
-                 padding: EdgeInsets.all(5),
-             
-                      decoration: BoxDecoration(
-                    color: Color(0xff014A83),
-                         border: Border.all(
-                color: Colors.white, // Border color
-                width: 1.5,           // Border width
-              ),
-              borderRadius: BorderRadius.circular(10)
-                      ),
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        withFood ? "5000" : "4000",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                const SizedBox(height: 16),
-              
-                //     // Book Now Button
-                    SizedBox(
-                      height: 43,
-                      width: 151,
-                      child: ElevatedButton(
-                        onPressed: () {
-                       launchGPayPayment();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                              side: BorderSide(
-          color: Colors.black, // Border color
-          width: 1.5,         // Border width
-        ),
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
-                        ),
-                        child: const Text("Book Now",style: TextStyle(
-                          color: Colors.white,
-                      
-                        ),),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-              
-                    // Back Button
-                 
-              
-          
-                  ],
-                 ),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-          
-                           Container(
-                            width: 150,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 1.5,
-                                color: Color(0xffDFF2FF)
-                              )
-                            ),
-                             child: TextButton(
-                              
-                                                 onPressed: () {
-                                                   Get.back();
-                                                 },
-                                                 child: const Text("Back"),
-                                               ),
-                           ),
-
-                                     // Submit Button
-                    const SizedBox(height: 20),
-             Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: (){},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(
-                            color: Color(0xFFB0B0B0), // Light black/grey border
-                            width: 1.5,
-                          ),
-                        ),
-                      ),
-                      child: const Text(
-                        'Next Step',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black, // Optional: Make text dark for contrast
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
+              Expanded(flex: 1, child: Container(color: Colors.white)),
+              Expanded(flex: 1, child: Container(color: const Color(0xff1A5D1A))),
             ],
           ),
-        ),
-      ),
-    );
-  }
 
-  Widget buildToggleButton(String label, bool value) {
-    return GestureDetector(
-      onTap: () => setState(() => withFood = value),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-        
-        decoration: BoxDecoration(
-          color: withFood == value ? Colors.white : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-           border: Border.all(
-      color: Colors.white, // Border color
-      width: 1.5,           // Border width
-    ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              value ? Icons.restaurant : Icons.no_meals,
-              size: 20,
-              color: withFood == value ? Colors.black : Colors.white,
-            ),
-            const SizedBox(width: 5),
-            Text(
-              label,
-              style: TextStyle(
-                color: withFood == value ? Colors.black : Colors.white,
+          // Content
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+
+                  // Logo
+                  Image.asset(
+                    'assets/images/splash_img.png',
+                    height: 100,
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // Card
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xffE8F3E3),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: const [
+                            Icon(Icons.notifications, size: 18),
+                            SizedBox(width: 5),
+                            Text(
+                              "Advance amount  Rs 2500/-",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        const Text(
+                          "Advance amount is refundable.",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black54,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Divider(
+                          thickness: 2,
+                          color: Colors.green,
+                          endIndent: 150,
+                        ),
+                        const SizedBox(height: 10),
+
+                        const Text("Monthly Rent with Food"),
+                        const SizedBox(height: 8),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedOption = 'with_food';
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: selectedOption == 'with_food'
+                                  ? Colors.yellow
+                                  : Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.black),
+                            ),
+                            child: const Text(
+                              "Rs.7500/-",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        const Text("Monthly Rent without Food"),
+                        const SizedBox(height: 8),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedOption = 'without_food';
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: selectedOption == 'without_food'
+                                  ? Colors.yellow
+                                  : Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.black),
+                            ),
+                            child: const Text(
+                              "Rs.5000/-",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 120), // For bottom button space
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+
+          // Bottom Button
+          Positioned(
+            bottom: 20,
+            left: 20,
+            right: 20,
+            child: SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                // onPressed: () {
+                //   if (selectedOption.isEmpty) {
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(
+                //           content: Text('Please Select A Rent option')),
+                //     );
+                //   } else {
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(
+                //           content: Text('We will let you know the status')),
+                //     );
+                //   }
+                // },
+             onPressed: () async {
+  if (selectedOption.isEmpty) {
+    Flushbar(
+      message: "Please Select A Rent option",
+      backgroundColor: Colors.redAccent,
+      duration: const Duration(seconds: 2),
+      flushbarPosition: FlushbarPosition.TOP,
+      margin: const EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(8),
+      icon: const Icon(Icons.warning, color: Colors.white),
+    ).show(context);
+    return;
+  }
+
+  final fullData = {
+ ...widget.registrationData,
+
+    "rentOption": selectedOption,
+    "bookingTimestamp": FieldValue.serverTimestamp(),
+  };
+
+  try {
+    await FirebaseFirestore.instance.collection("bookings").add(fullData);
+
+    await Flushbar(
+      message: "Booking Submitted Successfully!",
+      backgroundColor: Colors.green,
+      duration: const Duration(seconds: 2),
+      flushbarPosition: FlushbarPosition.TOP,
+      margin: const EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(8),
+      icon: const Icon(Icons.check_circle, color: Colors.white),
+    ).show(context);
+
+    // Show status message after successful booking
+    await Flushbar(
+      message: "We will let you know the status",
+      backgroundColor: Colors.blueGrey,
+      duration: const Duration(seconds: 3),
+      flushbarPosition: FlushbarPosition.TOP,
+      margin: const EdgeInsets.all(8),
+      borderRadius: BorderRadius.circular(8),
+      icon: const Icon(Icons.info, color: Colors.white),
+    ).show(context);
+     Get.toNamed(AppRoutes.thanks); 
+
+   
+
+} catch (e) {
+  String errorMessage = "An unknown error occurred.";
+
+  if (e is FirebaseException) {
+    errorMessage = e.message ?? e.code; // Get the actual Firebase message
+  } else {
+    errorMessage = e.toString();
+  }
+
+  Flushbar(
+    message: "Failed to Submit: $errorMessage",
+    backgroundColor: Colors.red,
+    duration: const Duration(seconds: 2),
+    flushbarPosition: FlushbarPosition.TOP,
+    margin: const EdgeInsets.all(8),
+    borderRadius: BorderRadius.circular(8),
+    icon: const Icon(Icons.error, color: Colors.white),
+  ).show(context);
+ 
+}
+
+},
+
+
+
+
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
+                  "Submit",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
-  
- 
-Future<void> launchGPayPayment() async {
-  final amount = withFood ? "5000" : "4000";
-  final upiId = "hridhyamm007@oksbi"; 
-  final name = Uri.encodeComponent("Hostel Buddy");
-  final note = Uri.encodeComponent("PG Booking");
-
-  final uriString =
-      "upi://pay?pa=$upiId&pn=$name&tn=$note&am=$amount&cu=INR";
-
-  final uri = Uri.parse(uriString);
-
-  try {
-    final launched = await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    );
-
-    if (!launched) {
-      Get.snackbar("Error", "Could not launch UPI app",
-          snackPosition: SnackPosition.BOTTOM);
-    }
-  } catch (e) {
-    Get.snackbar("Error", "No UPI app available",
-        snackPosition: SnackPosition.BOTTOM);
-  }
-}
-
-
 }

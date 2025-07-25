@@ -1,9 +1,33 @@
+// import 'package:get/get.dart';
+// import 'package:hostel_buddy/app/routes/app_routes.dart';
+// import 'package:hostel_buddy/modules/booking/view/booking_page.dart';
+// import 'package:hostel_buddy/modules/registration/views/registration_view.dart';
+// import 'package:hostel_buddy/modules/splash/views/splash_view.dart';
+
+
+// class AppPages {
+//   static final routes = [
+//     GetPage(
+//       name: AppRoutes.splash,
+//       page: () => SplashView(),
+//     ),
+//       GetPage(
+//       name: AppRoutes.registration,
+//       page: () => RegistrationForm(),
+//     ),
+//       GetPage(
+//       name: AppRoutes.booking,
+//       page: () => BookingPage(),
+//     ),
+//   ];
+// }
+
 import 'package:get/get.dart';
 import 'package:hostel_buddy/app/routes/app_routes.dart';
 import 'package:hostel_buddy/modules/booking/view/booking_page.dart';
+import 'package:hostel_buddy/modules/booking/view/thank_you_page.dart';
 import 'package:hostel_buddy/modules/registration/views/registration_view.dart';
 import 'package:hostel_buddy/modules/splash/views/splash_view.dart';
-
 
 class AppPages {
   static final routes = [
@@ -11,13 +35,20 @@ class AppPages {
       name: AppRoutes.splash,
       page: () => SplashView(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.registration,
       page: () => RegistrationForm(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.booking,
-      page: () => BookingPage(),
+      page: () => BookingPage(
+        registrationData: Get.arguments ?? {},
+      ),
     ),
+    GetPage(
+  name: AppRoutes.thanks,
+  page: () => const ThankYouPage(),
+),
+
   ];
 }

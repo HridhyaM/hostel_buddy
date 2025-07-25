@@ -46,7 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '403790800210',
     projectId: 'hostelbuddy-1226f',
     authDomain: 'hostelbuddy-1226f.firebaseapp.com',
-    storageBucket: 'hostelbuddy-1226f.firebasestorage.app',
+    storageBucket: 'hostelbuddy-1226f.appspot.com',
     measurementId: 'G-3C32D146EE',
   );
 
@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
     appId: '1:403790800210:android:ad5f0bdb9228ec743f468b',
     messagingSenderId: '403790800210',
     projectId: 'hostelbuddy-1226f',
-    storageBucket: 'hostelbuddy-1226f.firebasestorage.app',
+    storageBucket: 'hostelbuddy-1226f.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     appId: '1:403790800210:ios:4978515211ef2d683f468b',
     messagingSenderId: '403790800210',
     projectId: 'hostelbuddy-1226f',
-    storageBucket: 'hostelbuddy-1226f.firebasestorage.app',
+    storageBucket: 'hostelbuddy-1226f.appspot.com',
     iosBundleId: 'com.example.hostelBuddy',
   );
 
@@ -72,7 +72,7 @@ class DefaultFirebaseOptions {
     appId: '1:403790800210:ios:4978515211ef2d683f468b',
     messagingSenderId: '403790800210',
     projectId: 'hostelbuddy-1226f',
-    storageBucket: 'hostelbuddy-1226f.firebasestorage.app',
+    storageBucket: 'hostelbuddy-1226f.appspot.com',
     iosBundleId: 'com.example.hostelBuddy',
   );
 
@@ -82,7 +82,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '403790800210',
     projectId: 'hostelbuddy-1226f',
     authDomain: 'hostelbuddy-1226f.firebaseapp.com',
-    storageBucket: 'hostelbuddy-1226f.firebasestorage.app',
+   storageBucket: 'hostelbuddy-1226f.appspot.com',
     measurementId: 'G-ZWDV5GRGZV',
   );
 }
